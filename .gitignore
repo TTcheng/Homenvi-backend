@@ -1,0 +1,44 @@
+# maven ignore
+target/
+*.versionsBackup
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+.factorypath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+/temp
+/tmp
+app.jar
+choerodon-tool-liquibase.jar
+
+# system ignore
+.DS_Store
+Thumbs.db
+# test
+# src/test
+
+gitlabci/.generated
+
+/bin
+src/main/resources/application.yml
+# ./*.sh
+
+# vs code
+.vscode/
+
+# sonar
+.sonarlint/

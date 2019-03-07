@@ -1,0 +1,24 @@
+spring:
+  session:
+    timeout: 1800
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cux_todo?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+    password: root
+  application:
+    name: IEMS
+
+mybatis:
+  mapper-locations:
+    - classpath*:/mapper/*Mapper.xml
+    - classpath*:/mapper/*/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: error
+    me.wcc.iems.dao: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread][%level] %logger- %msg%n"

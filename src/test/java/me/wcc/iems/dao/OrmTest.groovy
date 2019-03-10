@@ -1,6 +1,7 @@
 package me.wcc.iems.dao
 
 import me.wcc.iems.Application
+import me.wcc.iems.entity.TestTable
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootContextLoader
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,16 +13,17 @@ import spock.lang.Specification
  */
 @SpringBootTest(classes = Application.class)
 @ContextConfiguration(loader = SpringBootContextLoader.class)
-class HomeDataDaoTest extends Specification {
+class OrmTest extends Specification {
     @Autowired
     TestTableDao tableDao;
 
     def "testBaseMapper"() {
         given:
         def id = 1;
+        def expect = new TestTable(1,"Jesse");
         when:
-        def test = tableDao.selectByPrimaryKey(id);
+        def res = tableDao.selectByPrimaryKey(id);
         then:
-        println(test)
+        expect == res
     }
 }

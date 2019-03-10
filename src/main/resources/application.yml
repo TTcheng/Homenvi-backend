@@ -1,5 +1,3 @@
-server:
-  port: 8440
 spring:
   profiles:
     active: dev

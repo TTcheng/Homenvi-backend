@@ -18,7 +18,10 @@ public class Role implements Serializable {
     private static final long serialVersionUID = -228463851192502799L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @ApiModelProperty("父角色ID")
+    private Long parentId;
 
     @NotNull
     @ApiModelProperty("角色名称")

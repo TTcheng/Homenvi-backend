@@ -3,7 +3,7 @@ create table iam_role
 (
   id                             bigint auto_increment
     primary key,
-  name                           varchar(64) collate utf8_bin         not null comment '角色名',
+  loginName                           varchar(64) collate utf8_bin         not null comment '角色名',
   code                           varchar(128) collate utf8_bin        not null comment '角色编码',
   permission_set_id              bigint     collate utf8_bin          not null comment '权限集ID',
   description                    varchar(255) collate utf8_bin        null comment '角色描述full description',

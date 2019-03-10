@@ -141,7 +141,7 @@
     <repositories>
         <repository>
             <id>HandPublic</id>
-            <name>HandPublic</name>
+            <loginName>HandPublic</loginName>
             <url>http://nexus.saas.hand-china.com/content/repositories/public/</url>
             <releases>
                 <enabled>true</enabled>
@@ -149,7 +149,7 @@
         </repository>
         <repository>
             <id>HandThirdParty</id>
-            <name>HandThirdParty</name>
+            <loginName>HandThirdParty</loginName>
             <url>http://nexus.saas.hand-china.com/content/repositories/thirdparty/</url>
             <releases>
                 <enabled>true</enabled>

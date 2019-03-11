@@ -1,4 +1,4 @@
-package me.wcc.base.infra.mapper;
+package me.wcc.base.mapper;
 
 
 import me.wcc.base.domain.User;

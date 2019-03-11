@@ -1,5 +1,7 @@
 package me.wcc.base.infra.constant;
 
+import io.swagger.models.auth.In;
+
 import java.util.Locale;
 
 /**
@@ -71,6 +73,7 @@ public class BaseConstants {
      * 默认编码
      */
     public static final String DEFAULT_CHARSET = "UTF-8";
+    public static final Integer REDIS_DB = 1;
 
     /**
      * 日期时间匹配格式

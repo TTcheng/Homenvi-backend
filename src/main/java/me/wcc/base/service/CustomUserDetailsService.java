@@ -1,14 +1,13 @@
-package me.wcc.base.app.service;
+package me.wcc.base.service;
 
 import me.wcc.base.domain.CustomUserDetails;
 import me.wcc.base.domain.User;
-import me.wcc.base.infra.mapper.UserMapper;
+import me.wcc.base.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author chuncheng.wang@hand-china.com 19-3-10 下午9:58

@@ -9,6 +9,7 @@ spring:
     name: iems
   redis:
     host: localhost
+    database: 0
 
 mybatis:
   mapper-locations:

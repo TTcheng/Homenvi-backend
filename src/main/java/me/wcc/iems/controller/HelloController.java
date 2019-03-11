@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Locale;
-
 import io.choerodon.mybatis.helper.LanguageHelper;
 
 /**
@@ -24,7 +22,6 @@ public class HelloController {
 
     @GetMapping("/msg")
     public String msg() {
-        String arg1 = " IEMS";
         return MessageAccessor.getMessage("iems.hello", LanguageHelper.language()).desc();
     }
 }

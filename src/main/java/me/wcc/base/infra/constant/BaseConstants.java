@@ -1,7 +1,5 @@
 package me.wcc.base.infra.constant;
 
-import io.swagger.models.auth.In;
-
 import java.util.Locale;
 
 /**

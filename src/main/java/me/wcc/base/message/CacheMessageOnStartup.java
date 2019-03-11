@@ -5,16 +5,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-import org.springframework.util.DefaultPropertiesPersister;
-import org.springframework.util.PropertiesPersister;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Properties;
 
 /**
  * <p>
- * 加载classpath:messages/messages.properties到内存中
+ * 创建ApplicationContext时缓存消息到Redis中
+ * classpath:messages/messages_zh_CN.properties
+ * classpath:messages/messages_en_US.properties
  * </p>
  *
  * @author chuncheng.wang@hand-china.com 19-3-11 下午8:25
@@ -22,9 +25,11 @@ import org.springframework.util.PropertiesPersister;
 @Component
 public class CacheMessageOnStartup implements ApplicationListener<ApplicationStartedEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(CacheMessageOnStartup.class);
+    private static final String MESSAGES_EN = "classpath:messages/messages_en_US.properties";
+    private static final String MESSAGES_ZH = "classpath:messages/messages_zh_CN.properties";
+    private static final Locale ZH_CN = Locale.CHINA;
+    private static final Locale EN_US = Locale.US;
 
-    private ResourceLoader resourceLoader = new DefaultResourceLoader();
-    private PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
     private CacheService cacheService;
 
     public CacheMessageOnStartup(CacheService cacheService) {
@@ -36,9 +41,43 @@ public class CacheMessageOnStartup implements ApplicationListener<ApplicationSta
     public void onApplicationEvent(ApplicationStartedEvent event) {
         LOGGER.info("缓存消息到Redis中");
         // todo 缓存消息到redis中
-        resourceLoader.getResource("classpath:messages/messages");
+        Properties messagesEn = new Properties();
+        Properties messagesZh = new Properties();
+        InputStream resourceInputStreamEn = this.getClass().getClassLoader().getResourceAsStream(MESSAGES_EN);
+        InputStream resourceInputStreamZh = this.getClass().getClassLoader().getResourceAsStream(MESSAGES_ZH);
+        try {
+            messagesEn.load(resourceInputStreamEn);
+        } catch (IOException e) {
+            LOGGER.error("读取{0}失败", MESSAGES_EN);
+        }
+        try {
+            messagesZh.load(resourceInputStreamZh);
+        } catch (IOException e) {
+            LOGGER.error("读取{0}失败", MESSAGES_ZH);
+        }
+        this.cacheMessages(messagesEn, EN_US);
+        this.cacheMessages(messagesZh, ZH_CN);
+    }
 
-//        Map<String,String> messages =
-//        cacheService.cacheMessage();
+    @SuppressWarnings("unchecked")
+    private void cacheMessages(Properties messages, Locale locale) {
+        if (!messages.isEmpty()) {
+            Enumeration<String> names = (Enumeration<String>) messages.propertyNames();
+            while (names.hasMoreElements()) {
+                String key = names.nextElement();
+                String value = messages.getProperty(key);
+                if (null != value) {
+                    Message.Type type = Message.Type.INFO;
+                    if (value.startsWith(Message.Type.ERROR.code())) {
+                        type = Message.Type.ERROR;
+                    }
+                    if (value.startsWith(Message.Type.WARN.code())) {
+                        type = Message.Type.WARN;
+                    }
+                    Message message = new Message(key, value, type);
+                    cacheService.cacheMessage(message, locale);
+                }
+            }
+        }
     }
 }

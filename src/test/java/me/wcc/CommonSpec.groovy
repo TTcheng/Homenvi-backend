@@ -2,6 +2,7 @@ package me.wcc
 
 import org.apache.commons.lang3.StringUtils
 import org.springframework.core.io.DefaultResourceLoader
+import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
 import spock.lang.Specification
 
@@ -28,11 +29,10 @@ class CommonSpec extends Specification {
         expect == res
     }
 
-    testResourceLoader(){
+    void testResourceLoader(){
         given:
         ResourceLoader resourceLoader = new DefaultResourceLoader()
 
-//        when:
 
     }
 }

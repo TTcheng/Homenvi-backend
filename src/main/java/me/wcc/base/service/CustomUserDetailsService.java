@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService{
     UserMapper userMapper;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s) {
         User user = userMapper.selectOne(new User(s));
         if (user == null) {
             throw new UsernameNotFoundException("用户名不对");

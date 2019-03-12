@@ -2,10 +2,14 @@ package me.wcc.base.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.spring4all.swagger.SwaggerAutoConfiguration;
 import me.wcc.base.infra.serial.DateDeserializer;
 import me.wcc.base.infra.serial.DateSerializer;
+import me.wcc.base.message.Message;
+import me.wcc.base.message.convert.MessageDeserializer;
+import me.wcc.base.message.convert.MessageSerializer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -55,6 +59,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         javaTimeModule.addSerializer(Date.class, new DateSerializer());
         javaTimeModule.addDeserializer(Date.class, new DateDeserializer());
         mapper.registerModule(javaTimeModule);
+        SimpleModule messageModule = new SimpleModule();
+        messageModule.addDeserializer(Message.class, new MessageDeserializer());
+        messageModule.addSerializer(Message.class, new MessageSerializer());
+        mapper.registerModule(messageModule);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
     }

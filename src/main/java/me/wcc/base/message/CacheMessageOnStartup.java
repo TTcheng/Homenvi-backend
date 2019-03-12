@@ -25,8 +25,8 @@ import java.util.Properties;
 @Component
 public class CacheMessageOnStartup implements ApplicationListener<ApplicationStartedEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(CacheMessageOnStartup.class);
-    private static final String MESSAGES_EN = "classpath:messages/messages_en_US.properties";
-    private static final String MESSAGES_ZH = "classpath:messages/messages_zh_CN.properties";
+    private static final String MESSAGES_EN = "messages/messages_en_US.properties";
+    private static final String MESSAGES_ZH = "messages/messages_zh_CN.properties";
     private static final Locale ZH_CN = Locale.CHINA;
     private static final Locale EN_US = Locale.US;
 
@@ -40,11 +40,10 @@ public class CacheMessageOnStartup implements ApplicationListener<ApplicationSta
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
         LOGGER.info("缓存消息到Redis中");
-        // todo 缓存消息到redis中
         Properties messagesEn = new Properties();
         Properties messagesZh = new Properties();
-        InputStream resourceInputStreamEn = this.getClass().getClassLoader().getResourceAsStream(MESSAGES_EN);
-        InputStream resourceInputStreamZh = this.getClass().getClassLoader().getResourceAsStream(MESSAGES_ZH);
+        InputStream resourceInputStreamEn = CacheMessageOnStartup.class.getClassLoader().getResourceAsStream(MESSAGES_EN);
+        InputStream resourceInputStreamZh = CacheMessageOnStartup.class.getClassLoader().getResourceAsStream(MESSAGES_ZH);
         try {
             messagesEn.load(resourceInputStreamEn);
         } catch (IOException e) {
@@ -53,7 +52,7 @@ public class CacheMessageOnStartup implements ApplicationListener<ApplicationSta
         try {
             messagesZh.load(resourceInputStreamZh);
         } catch (IOException e) {
-            LOGGER.error("读取{0}失败", MESSAGES_ZH);
+            LOGGER.error("读取{}失败", MESSAGES_ZH);
         }
         this.cacheMessages(messagesEn, EN_US);
         this.cacheMessages(messagesZh, ZH_CN);

@@ -31,7 +31,7 @@ public class CacheService {
      * 缓存消息到redis
      */
     public void cacheMessage(Message message, Locale locale) {
-        String uniqueKey = this.buildUniqueKey(message, locale);
+        String uniqueKey = this.buildUniqueKey(locale);
         try {
             redisHelper.hshPut(uniqueKey, message.code(), objectMapper.writeValueAsString(message));
         } catch (JsonProcessingException e) {
@@ -50,7 +50,7 @@ public class CacheService {
      * 清除缓存
      */
     public void clearCache(Message message, Locale locale) {
-        String uniqueKey = this.buildUniqueKey(message, locale);
+        String uniqueKey = this.buildUniqueKey(locale);
         redisHelper.hshDelete(uniqueKey, message.code());
     }
 
@@ -59,10 +59,9 @@ public class CacheService {
      *
      * @return uniqueKey
      */
-    private String buildUniqueKey(Message message, Locale locale) {
+    private String buildUniqueKey(Locale locale) {
         // 使用 code 和 lang 组成缓存 hash 的唯一键
-        return StringUtils.join(BaseConstants.FIELD_MSG, BaseConstants.Symbol.COLON,
-                message.code(), BaseConstants.Symbol.COLON, locale);
+        return StringUtils.join(BaseConstants.FIELD_MSG, BaseConstants.Symbol.COLON, locale);
     }
 
 }

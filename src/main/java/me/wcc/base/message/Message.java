@@ -1,12 +1,18 @@
 package me.wcc.base.message;
 
+import java.io.Serializable;
+
 /**
  * 消息及类型
  *
  * @author bojiangzhou 2019/01/11
  */
-public class Message {
+public class Message implements Serializable {
 
+    private static final long serialVersionUID = 8091043474642466118L;
+    public static final String FIELD_CODE = "code";
+    public static final String FIELD_DESC = "desc";
+    public static final String FIELD_TYPE = "type";
     public static final Type DEFAULT_TYPE = Type.WARN;
 
     private String code;

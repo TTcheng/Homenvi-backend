@@ -74,6 +74,79 @@ public class BaseConstants {
     public static final Integer REDIS_DB = 0;
 
     /**
+     * 基础异常编码
+     */
+    public static final class ErrorCode {
+        /**
+         * 数据校验不通过
+         */
+        public static final String DATA_INVALID = "error.data_invalid";
+        /**
+         * 资源不存在
+         */
+        public static final String NOT_FOUND = "error.not_found";
+        /**
+         * 程序出现错误，请联系管理员
+         */
+        public static final String ERROR = "error.error";
+        /**
+         * 网络异常，请稍后重试
+         */
+        public static final String ERROR_NET = "error.network";
+        /**
+         * 记录不存在或版本不一致
+         */
+        public static final String OPTIMISTIC_LOCK = "error.optimistic_lock";
+        /**
+         * 数据已存在，请不要重复提交
+         */
+        public static final String DATA_EXISTS = "error.data_exists";
+        /**
+         * 数据不存在
+         */
+        public static final String DATA_NOT_EXISTS = "error.data_not_exists";
+        /**
+         * 资源禁止访问
+         */
+        public static final String FORBIDDEN = "error.forbidden";
+        /**
+         * 数据库异常：编码重复
+         */
+        public static final String ERROR_CODE_REPEAT = "error.code_repeat";
+        /**
+         * 数据库异常：编号重复
+         */
+        public static final String ERROR_NUMBER_REPEAT = "error.number_repeat";
+        /**
+         * SQL执行异常
+         */
+        public static final String ERROR_SQL_EXCEPTION = "error.sql_exception";
+        /**
+         * 请登录后再进行操作！
+         */
+        public static final String NOT_LOGIN = "error.not_login";
+        /**
+         * 不能为空
+         */
+        public static final String NOT_NULL = "error.not_null";
+        /**
+         * 用户名或密码错误
+         */
+        public static final String WRONG_PWD_OR_NAME = "error.auth.wrong_password_or_username";
+        /**
+         * 内部错误
+         */
+        public static final String INTERNAL_ERROR = "error.internal_error";
+        /**
+         * 不支持的认证错误
+         */
+        public static final String UNKNOWN_AUTH_ERROR = "error.auth.unknown_authentication_error";
+
+        private ErrorCode() {
+        }
+    }
+
+    /**
      * 日期时间匹配格式
      */
     public static final class Pattern {

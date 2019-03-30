@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  */
 @EnableSwagger2Doc
 @EnableAuthorizationServer
-@SpringBootApplication(scanBasePackages = {"me.wcc.auth", "me.wcc.base", "me.wcc.homenvi"})
+@SpringBootApplication(scanBasePackages = {"io.choerodon.mybatis", "me.wcc.auth", "me.wcc.base", "me.wcc.homenvi"})
 public class Application {
     public static void main(String[] args) {
 

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 
@@ -16,10 +18,14 @@ import java.util.Collections;
  * @author chuncheng.wang@hand-china.com 19-3-10 下午9:58
  */
 @Service
-public class HomenviUserDetailService implements UserDetailsService {
+@Transactional
+public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    TokenStore tokenStore;
 
     @Override
     public UserDetails loadUserByUsername(String s) {

@@ -10,6 +10,8 @@ spring:
   redis:
     host: localhost
     database: 0
+#  main:
+#    allow-bean-definition-overriding: true
 
 mybatis:
   mapper-locations:

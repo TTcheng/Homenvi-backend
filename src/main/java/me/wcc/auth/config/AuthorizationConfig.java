@@ -1,7 +1,7 @@
 package me.wcc.auth.config;
 
 import me.wcc.auth.exception.HomenviWebResponseExceptionTranslator;
-import me.wcc.auth.service.HomenviUserDetailService;
+import me.wcc.auth.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +35,7 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     private HomenviWebResponseExceptionTranslator webResponseExceptionTranslator;
 
     @Autowired
-    private HomenviUserDetailService userDetailsService;
+    private CustomUserDetailService userDetailsService;
 
     @Autowired
     TokenStore tokenStore;

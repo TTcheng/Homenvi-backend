@@ -100,13 +100,6 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/choerodon-starter-mybatis-0.9.3.RELEASE.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>me.wcc</groupId>
-            <artifactId>choerodon-starter-mybatis-mapper</artifactId>
-            <version>0.9.3.SIMPLIFED</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/choerodon-starter-mybatis-mapper-0.9.3.SIMPLIFIED.jar</systemPath>
-        </dependency>
 
         <dependency>
             <groupId>javax.persistence</groupId>

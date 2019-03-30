@@ -23,6 +23,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  * 
  * @author xianzhi.chen@hand-china.com 2018年6月8日上午11:20:39
  */
+@SuppressWarnings("unused")
 public class RedisHelper {
 
     private Logger logger = LoggerFactory.getLogger(RedisHelper.class);

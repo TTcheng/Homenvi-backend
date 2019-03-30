@@ -141,6 +141,7 @@ public class BaseConstants {
          * 不支持的认证错误
          */
         public static final String UNKNOWN_AUTH_ERROR = "error.auth.unknown_authentication_error";
+        public static final String FIELD_NOT_NULL = "error.base.field_not_null";
 
         private ErrorCode() {
         }

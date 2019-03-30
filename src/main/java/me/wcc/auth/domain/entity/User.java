@@ -32,6 +32,7 @@ public class User extends AuditDomain implements Serializable {
 
     private static final long serialVersionUID = 5707454509247323466L;
 
+    public static final String CLASS_NAME = "User";
     public static final String FIELD_ID = "id";
     public static final String FIELD_LOGIN_NAME = "loginName";
     public static final String FIELD_EMAIL = "email";
@@ -306,10 +307,6 @@ public class User extends AuditDomain implements Serializable {
 
     public void setPasswordAttempt(Integer passwordAttempt) {
         this.passwordAttempt = passwordAttempt;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
     }
 
     public void setRoles(List<Role> roles) {

@@ -15,7 +15,11 @@ import java.util.Collection;
 public class CustomUserDetails implements Serializable, UserDetails {
 
     private static final long serialVersionUID = -5283831892608417510L;
+    public static final String CLASS_NAME = "CustomUserDetails";
     private User user;
+
+    public CustomUserDetails() {
+    }
 
     public CustomUserDetails(User user) {
         this.user = user;
@@ -23,12 +27,18 @@ public class CustomUserDetails implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        /*List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : user.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;*/
+        /*
+        * List<GrantedAuthority> authorities = new ArrayList<>();
+        * for (Role role : user.getRoles()) {
+        *    authorities.add(new SimpleGrantedAuthority(role.getName()));
+        * }
+        * return authorities;
+        */
         return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_SUPER");
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
@@ -59,5 +69,20 @@ public class CustomUserDetails implements Serializable, UserDetails {
     @Override
     public boolean isEnabled() {
         return BaseConstants.FLAG_YES.equals(user.getEnabled());
+    }
+
+    public String getTimeZone() {
+        // TODO timeZone
+        return null;
+    }
+
+    public String getLanguage() {
+        // TODO language
+        return null;
+    }
+
+    public Long getUserId() {
+        // TODO userID
+        return null;
     }
 }

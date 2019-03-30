@@ -1,8 +1,10 @@
 package me.wcc.base.handler;
 
+import me.wcc.auth.domain.CustomUserDetails;
 import me.wcc.base.exception.CommonException;
 import me.wcc.base.exception.ExceptionResponse;
 import me.wcc.base.exception.NotFoundException;
+import me.wcc.auth.helper.UserDetailsHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import io.choerodon.mybatis.helper.CustomUserDetails;
-import io.choerodon.mybatis.helper.DetailsHelper;
-
+import io.choerodon.mybatis.helper.LanguageHelper;
 
 /**
  * 捕获控制器的异常，并返回异常信息
@@ -177,14 +177,12 @@ public class ControllerExceptionHandler {
     /**
      * 返回用户的语言类型
      *
-     * @return Locale
+     * @return Simplified Chinese or US english
      */
     private Locale locale() {
-        CustomUserDetails details = DetailsHelper.getUserDetails();
-        Locale locale = Locale.SIMPLIFIED_CHINESE;
-        if (details != null && "en_US".equals(details.getLanguage())) {
-            locale = Locale.US;
+        if ("zh_CN".equals(LanguageHelper.language())) {
+            return Locale.SIMPLIFIED_CHINESE;
         }
-        return locale;
+        return Locale.US;
     }
 }

@@ -1,8 +1,8 @@
 package me.wcc.auth.config.provider;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.wcc.auth.domain.CustomUserDetails;
+import me.wcc.base.service.CacheService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +36,10 @@ public class HomenviUserAuthenticationProvider implements AuthenticationProvider
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    @Qualifier("homenviUserDetailService")
-    UserDetailsService userDetailsService;
+    @Qualifier("customUserDetailService")
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private CacheService cacheService;
 
     /**
      * 认证逻辑
@@ -49,17 +51,12 @@ public class HomenviUserAuthenticationProvider implements AuthenticationProvider
 
         CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(username);
         if (!passwordEncoder.matches(credentials, userDetails.getPassword())) {
-            LOGGER.debug(">>>>>>>>>>>>>>BadCredentials<<<<<<<<<<<<<");
+            LOGGER.debug("BadCredentials,request authentication{}", authentication);
             throw new BadCredentialsException("BadCredentials");
         }
         Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
-        String detailsString = null;
-        try {
-            detailsString = objectMapper.writeValueAsString(userDetails);
-        } catch (JsonProcessingException e) {
-            LOGGER.error("Authentication error", e);
-        }
-        return new UsernamePasswordAuthenticationToken(detailsString, credentials, authorities);
+        cacheService.cacheCustomUserDetails(userDetails);
+        return new UsernamePasswordAuthenticationToken(userDetails, credentials, authorities);
     }
 
     @Override

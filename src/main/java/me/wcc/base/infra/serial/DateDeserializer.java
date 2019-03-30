@@ -3,6 +3,7 @@ package me.wcc.base.infra.serial;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import me.wcc.base.helper.TimeZoneHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import io.choerodon.mybatis.helper.CustomUserDetails;
-import io.choerodon.mybatis.helper.DetailsHelper;
 /**
  * 根据用户的时区反序列化时间
  *
@@ -25,10 +24,8 @@ public class DateDeserializer extends JsonDeserializer<Date> {
     public Date deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         try {
             SimpleDateFormat dateFormatGmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            CustomUserDetails details = DetailsHelper.getUserDetails();
-            if (details != null && details.getTimeZone() != null) {
-                dateFormatGmt.setTimeZone(TimeZone.getTimeZone(details.getTimeZone()));
-            }
+            String timezone = TimeZoneHelper.timezone();
+            dateFormatGmt.setTimeZone(TimeZone.getTimeZone(timezone));
             return dateFormatGmt.parse(jsonParser.getValueAsString());
         } catch (Exception e) {
             LOGGER.warn("date format error : {}", e);

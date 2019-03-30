@@ -2,7 +2,7 @@ package me.wcc.auth.config;
 
 import me.wcc.auth.config.encoder.HomenviPasswordEncoder;
 import me.wcc.auth.config.provider.HomenviUserAuthenticationProvider;
-import me.wcc.auth.service.HomenviUserDetailService;
+import me.wcc.auth.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class HomenviSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    HomenviUserDetailService homenviUserDetailService;
+    CustomUserDetailService customUserDetailService;
     @Autowired
     HomenviUserAuthenticationProvider authenticationProvider;
 
@@ -45,7 +45,7 @@ public class HomenviSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(homenviUserDetailService);
+        auth.userDetailsService(customUserDetailService);
         auth.authenticationProvider(authenticationProvider);
         // auth.userDetailsService(homenviUserDetailService).passwordEncoder(bCryptEncoder());
         // auth.inMemoryAuthentication()

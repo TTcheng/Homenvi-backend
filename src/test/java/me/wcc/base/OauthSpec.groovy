@@ -22,10 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * <p>
- * todo
- * </p>
- *
  * @author chuncheng.wang@hand-china.com 19-3-28 下午3:55
  */
 @Transactional

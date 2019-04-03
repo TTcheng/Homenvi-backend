@@ -20,6 +20,7 @@ import java.util.Map;
 /**
  * @author chuncheng.wang@hand-china.com 19-3-30 下午11:21
  */
+@SuppressWarnings("unused")
 public abstract class BaseController {
     @Autowired
     private HttpServletRequest request;
@@ -53,12 +54,12 @@ public abstract class BaseController {
     protected User getCurrentUser() {
         String authorization = request.getHeader("Authorization");
         if (null == authorization || !authorization.startsWith("Bearer ")) {
-            throw new CommonException("请先登录!");
+            throw new CommonException("Unauthorized");
         }
         String token = authorization.split(" ")[1];
         OAuth2Authentication oAuth2Authentication = tokenStore.readAuthentication(token);
         if (null == oAuth2Authentication) {
-            return null;
+            throw new CommonException("Access token expired");
         }
         Object details = oAuth2Authentication.getUserAuthentication().getDetails();
         if (details instanceof Map) {
@@ -75,6 +76,6 @@ public abstract class BaseController {
             }
             return ((CustomUserDetails) userDetails).getUser();
         }
-        return null;
+        throw new CommonException(BaseConstants.ErrorCode.UNKNOWN_AUTH_ERROR);
     }
 }

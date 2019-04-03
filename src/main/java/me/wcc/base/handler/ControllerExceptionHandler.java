@@ -1,10 +1,8 @@
 package me.wcc.base.handler;
 
-import me.wcc.auth.domain.CustomUserDetails;
 import me.wcc.base.exception.CommonException;
 import me.wcc.base.exception.ExceptionResponse;
 import me.wcc.base.exception.NotFoundException;
-import me.wcc.auth.helper.UserDetailsHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -72,17 +72,14 @@ public class CustomUserDetails implements Serializable, UserDetails {
     }
 
     public String getTimeZone() {
-        // TODO timeZone
-        return null;
+        return user.getTimeZone();
     }
 
     public String getLanguage() {
-        // TODO language
-        return null;
+        return user.getLanguage();
     }
 
     public Long getUserId() {
-        // TODO userID
-        return null;
+        return user.getId();
     }
 }

@@ -1,7 +1,10 @@
 package me.wcc.auth.config;
 
+import me.wcc.auth.config.interceptor.AuthInterceptor;
 import me.wcc.auth.exception.HomenviWebResponseExceptionTranslator;
 import me.wcc.auth.service.CustomUserDetailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +17,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -23,7 +29,8 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableAuthorizationServer // 提供/oauth/authorize,/oauth/token,/oauth/check_token,/oauth/confirm_access,/oauth/error
-public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter implements WebMvcConfigurer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationConfig.class);
 
     @Resource
     private AuthenticationManager authenticationManager;
@@ -49,6 +56,20 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
         // return new InMemoryTokenStore();
         // return new JdbcTokenStore(dataSource);
         return new HomenviRedisTokenStore(connectionFactory);
+    }
+
+    /**
+     * MVC认证拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        AuthInterceptor authInterceptor = new AuthInterceptor(tokenStore);
+        InterceptorRegistration authRegistration = registry.addInterceptor(authInterceptor);
+        authRegistration.addPathPatterns("/**");
+        authRegistration.excludePathPatterns("/openApi/**");
+        authRegistration.excludePathPatterns("/oauth/**");
+        authRegistration.excludePathPatterns("/test/**");
+        LOGGER.debug("Register auth interceptor");
     }
 
     @Override

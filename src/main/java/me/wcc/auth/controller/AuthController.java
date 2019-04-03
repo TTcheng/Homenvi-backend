@@ -8,9 +8,7 @@ import me.wcc.base.controller.BaseController;
 import me.wcc.base.infra.utils.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author chuncheng.wang@hand-china.com 19-3-27 上午10:22

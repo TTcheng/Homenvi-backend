@@ -23,18 +23,18 @@ public class AuthInterceptor implements HandlerInterceptor {
         String authorization = request.getHeader("Authorization");
         if (null == authorization || !authorization.startsWith("Bearer ")) {
             response.setStatus(401);
-            response.setContentType("text/html");
+            response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            response.getWriter().write("<error>Unauthorized</error>");
+            response.getWriter().write("{\"error\":\"unauthorized\",\"error_description\":\"Full authentication is required to access this resource\"}");
             return false;
         }
         String token = authorization.split(" ")[1];
         OAuth2Authentication oAuth2Authentication = tokenStore.readAuthentication(token);
         if (null == oAuth2Authentication) {
             response.setStatus(401);
-            response.setContentType("text/html");
+            response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            response.getWriter().write("<error>Access_token_expired</error>");
+            response.getWriter().write("{\"error\":\"unauthorized\",\"error_description\":\"PERMISSION_ACCESS_TOKEN_EXPIRED\"}");
             return false;
         }
         return true;

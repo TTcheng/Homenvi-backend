@@ -40,6 +40,8 @@ public class HomenviWebResponseExceptionTranslator extends DefaultWebResponseExc
             oAuth2Exception = new InvalidGrantException(errorMsg, e);
         } else if (e instanceof InternalAuthenticationServiceException) {
             oAuth2Exception = new InvalidGrantException(e.getMessage(), e);
+        } else if (e instanceof OAuth2Exception) {
+            oAuth2Exception = new OAuth2Exception(e.getMessage(), e);
         } else {
             String errorMsg = MessageAccessor.getMessage(BaseConstants.ErrorCode.UNKNOWN_AUTH_ERROR).desc();
             oAuth2Exception = new UnsupportedResponseTypeException(errorMsg, e);

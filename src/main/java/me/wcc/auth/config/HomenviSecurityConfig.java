@@ -26,15 +26,15 @@ public class HomenviSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().csrf().disable();
-        http.requestMatchers().antMatchers("/oauth/**", "/test/**", "/homenvi/**", "/openApi/**")
+        http.requestMatchers().antMatchers("/oauth/**", "/test/**", "/homenvi/**", "/openApi/**", "/user/**")
                 .and()
                 .authorizeRequests()
                 // 开放路由/oauth/**,/test/**
-                .antMatchers("/oauth/**", "/test/**").permitAll()
+                .antMatchers("/oauth/**", "/test/**", "/user/login").permitAll()
                 // 其他URL均需授权
                 .anyRequest().authenticated()
                 // 允许表单登录
-                .and().formLogin().permitAll();
+                .and().formLogin().loginProcessingUrl("/user/login").permitAll();
     }
 
     @Bean

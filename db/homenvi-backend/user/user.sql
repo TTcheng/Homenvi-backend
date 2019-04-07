@@ -23,7 +23,7 @@ create table iam_user
   created_by               bigint                       default 0                 null,
   creation_date            datetime                     default CURRENT_TIMESTAMP null,
   last_updated_by          bigint                       default 0                 null,
-  last_update_date         datetime                     default CURRENT_TIMESTAMP null,
+  last_update_date         datetime                     default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  null,
   constraint iam_user_u1
     unique (login_name),
   constraint iam_user_u2

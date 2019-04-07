@@ -65,10 +65,8 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter im
     public void addInterceptors(InterceptorRegistry registry) {
         AuthInterceptor authInterceptor = new AuthInterceptor(tokenStore);
         InterceptorRegistration authRegistration = registry.addInterceptor(authInterceptor);
-        authRegistration.addPathPatterns("/**");
-        authRegistration.excludePathPatterns("/openApi/**");
-        authRegistration.excludePathPatterns("/oauth/**");
-        authRegistration.excludePathPatterns("/test/**");
+        authRegistration.addPathPatterns("/homenvi/**");
+        authRegistration.addPathPatterns("/user/current");
         LOGGER.debug("Register auth interceptor");
     }
 

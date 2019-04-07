@@ -6,7 +6,7 @@ spring:
     url: jdbc:mysql://132.232.181.189:3306/iems_monitor?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&serverTimezone=UTC&useLegacyDatetimeCode=false
     username: iems
     password: iems
-    name: iems
+    name: homenvi-db
   redis:
     host: localhost
     database: 0

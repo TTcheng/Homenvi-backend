@@ -3,7 +3,6 @@ package me.wcc.auth.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import me.wcc.auth.domain.entity.User;
-import me.wcc.auth.service.UserService;
 import me.wcc.base.controller.BaseController;
 import me.wcc.base.exception.CommonException;
 import me.wcc.base.infra.constant.BaseConstants;
@@ -29,9 +28,13 @@ import java.util.Map;
 @RequestMapping("/user")
 public class AuthController extends BaseController {
     @Autowired
-    UserService userService;
-    @Autowired
-    TokenEndpoint tokenEndpoint;
+    private TokenEndpoint tokenEndpoint;
+
+    @GetMapping("/check")
+    @ApiOperation("检查是否登录")
+    public ResponseEntity check(){
+        return Results.success();
+    }
 
     @GetMapping("/current")
     @ApiOperation("获取当前用户信息")

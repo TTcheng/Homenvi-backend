@@ -32,9 +32,7 @@ public class HomenviSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 开放路由/oauth/**,/test/**
                 .antMatchers("/oauth/**", "/test/**", "/user/login").permitAll()
                 // 其他URL均需授权
-                .anyRequest().authenticated()
-                // 允许表单登录
-                .and().formLogin().loginProcessingUrl("/user/login").permitAll();
+                .anyRequest().authenticated();
     }
 
     @Bean

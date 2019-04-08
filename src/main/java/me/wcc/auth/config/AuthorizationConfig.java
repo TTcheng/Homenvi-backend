@@ -67,6 +67,8 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter im
         InterceptorRegistration authRegistration = registry.addInterceptor(authInterceptor);
         authRegistration.addPathPatterns("/homenvi/**");
         authRegistration.addPathPatterns("/user/current");
+        authRegistration.addPathPatterns("/user/check");
+//        authRegistration.excludePathPatterns("/user/login");
         LOGGER.debug("Register auth interceptor");
     }
 

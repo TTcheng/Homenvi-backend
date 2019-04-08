@@ -23,17 +23,13 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public abstract class BaseController {
     @Autowired
-    private HttpServletRequest request;
+    protected HttpServletRequest request;
     @Autowired
-    private TokenStore tokenStore;
+    protected TokenStore tokenStore;
     @Autowired
-    private CustomUserDetailService userDetailsService;
+    protected CustomUserDetailService userDetailsService;
     @Autowired
-    private CacheService cacheService;
-
-    public HttpServletRequest getRequest() {
-        return request;
-    }
+    protected CacheService cacheService;
 
     protected void validateEmpty(String name, Object val) {
         if (StringUtils.isEmpty(val)) {
@@ -65,11 +61,8 @@ public abstract class BaseController {
         if (details instanceof Map) {
             @SuppressWarnings("unchecked")
             Map<String, String> detailsMap = (Map<String, String>) details;
+            // detailsMap contains [username,client_id,client_secret,scope,grant_type]
             String username = detailsMap.get("username");
-            /*
-             * String grantType = detailsMap.get("grant_type"); String scope = detailsMap.get("scope"); String
-             * clientId = detailsMap.get("client_id"); String clientSecret = detailsMap.get("client_secret");
-             */
             UserDetails userDetails = cacheService.getCustomUserDetails(username);
             if (null == userDetails) {
                 userDetails = userDetailsService.loadUserByUsername(username);

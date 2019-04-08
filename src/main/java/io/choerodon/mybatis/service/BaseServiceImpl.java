@@ -6,12 +6,14 @@ import java.util.List;
 import io.choerodon.mybatis.common.BaseMapper;
 import io.choerodon.mybatis.helper.OptionalHelper;
 import io.choerodon.mybatis.pagehelper.PageHelper;
+import io.choerodon.mybatis.pagehelper.domain.PageRequest;
 
 import me.wcc.base.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by xausky on 3/15/17.
+ * @author WangChuncheng 4/8/19.
  */
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
     @Autowired
@@ -76,6 +78,11 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
+    public Page<T> pageAndSort(PageRequest pageRequest, T record) {
+        return PageHelper.doPageAndSort(pageRequest, () -> mapper.select(record));
+    }
+
+    @Override
     public int insertOptional(T record, String... optionals) {
         OptionalHelper.optional(Arrays.asList(optionals));
         return mapper.insertOptional(record);
@@ -86,5 +93,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         OptionalHelper.optional(Arrays.asList(optionals));
         return mapper.updateOptional(record);
     }
+
+
 
 }

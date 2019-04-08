@@ -4,6 +4,8 @@ import me.wcc.base.domain.Page;
 
 import java.util.List;
 
+import io.choerodon.mybatis.pagehelper.domain.PageRequest;
+
 /**
  * Created by xausky on 3/16/17.
  */
@@ -36,6 +38,8 @@ public interface BaseService<T> {
     Page<T> pageAll(int page, int size);
 
     Page<T> page(T record, int page, int size);
+
+    Page<T> pageAndSort(PageRequest pageRequest, T record);
 
     int insertOptional(T record, String... optionals);
 

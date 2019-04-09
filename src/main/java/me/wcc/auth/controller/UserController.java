@@ -33,9 +33,6 @@ public class UserController extends BaseController {
 
     // todo 接口权限控制
 
-    /**
-     * 列表
-     */
     @ApiOperation(value = "用户列表")
     @GetMapping
     public ResponseEntity<Page<User>> list(User user, @ApiIgnore @SortDefault(value = User.FIELD_ID,
@@ -45,9 +42,6 @@ public class UserController extends BaseController {
     }
 
 
-    /**
-     * 详细
-     */
     @ApiOperation(value = "用户明细")
     @RequestMapping("/{id}")
     public ResponseEntity<User> detail(@PathVariable Long id) {
@@ -55,9 +49,6 @@ public class UserController extends BaseController {
         return Results.success(user);
     }
 
-    /**
-     * 创建
-     */
     @ApiOperation(value = "用户创建")
     @PostMapping
     public ResponseEntity<User> create(@RequestBody User user) {
@@ -65,9 +56,6 @@ public class UserController extends BaseController {
         return Results.success(user);
     }
 
-    /**
-     * 修改
-     */
     @ApiOperation(value = "修改用户")
     @PutMapping
     public ResponseEntity<User> update(@RequestBody User user) {
@@ -75,9 +63,6 @@ public class UserController extends BaseController {
         return Results.success(user);
     }
 
-    /**
-     * 删除
-     */
     @ApiOperation(value = "删除用户")
     @DeleteMapping("/{id}")
     public ResponseEntity<User> remove(@PathVariable Long id) {

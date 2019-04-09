@@ -13,6 +13,7 @@ import io.choerodon.mybatis.annotation.VersionAudit;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import me.wcc.homenvi.entity.Notification;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -67,7 +68,7 @@ public class User extends AuditDomain implements Serializable {
     // ------------------------------------------------------------------------------
 
 
-    @ApiModelProperty("")
+    @ApiModelProperty("主键ID")
     @Id
     @GeneratedValue
     private Long id;
@@ -117,12 +118,24 @@ public class User extends AuditDomain implements Serializable {
     // ------------------------------------------------------------------------------
     @Transient
     private List<Role> roles;
+
+    /**
+     * 未读通知
+     */
+    @Transient
+    private List<Notification> notifications;
+
+    /**
+     * 未读通知数量
+     */
+    @Transient
+    private Integer notifyCount;
     //
     // getter/setter
     // ------------------------------------------------------------------------------
 
     /**
-     * @return
+     * @return 主键ID
      */
     public Long getId() {
         return id;
@@ -310,5 +323,27 @@ public class User extends AuditDomain implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    /**
+     * @return 未读通知
+     */
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    /**
+     * @return 未读通知数量
+     */
+    public Integer getNotifyCount() {
+        return notifyCount;
+    }
+
+    public void setNotifyCount(Integer notifyCount) {
+        this.notifyCount = notifyCount;
     }
 }

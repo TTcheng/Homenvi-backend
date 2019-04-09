@@ -1,5 +1,6 @@
 package me.wcc.homenvi.controller;
 
+import io.swagger.annotations.ApiModel;
 import me.wcc.base.controller.BaseController;
 import me.wcc.base.domain.Page;
 import me.wcc.base.infra.utils.Results;
@@ -22,7 +23,8 @@ import springfox.documentation.annotations.ApiIgnore;
  * @author chuncheng.wang@hand-china.com
  * @date 2019-04-08 17:38:52
  */
-@RestController("notificationController.v1")
+@ApiModel("通知管理")
+@RestController("notificationController")
 @RequestMapping("/notifications")
 public class NotificationController extends BaseController {
 

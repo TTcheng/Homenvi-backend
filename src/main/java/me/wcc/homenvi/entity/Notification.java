@@ -34,7 +34,18 @@ public class Notification extends AuditDomain {
 // 业务方法(按public protected private顺序排列)
 // ------------------------------------------------------------------------------
 
-//
+    public Notification() {
+    }
+
+    public Notification(@NotNull Long userid) {
+        this.userid = userid;
+    }
+
+    public Notification(@NotNull Long userid, Integer unread) {
+        this.userid = userid;
+        this.unread = unread;
+    }
+    //
 // 数据库字段
 // ------------------------------------------------------------------------------
 

@@ -7,6 +7,8 @@ import me.wcc.base.controller.BaseController;
 import me.wcc.base.exception.CommonException;
 import me.wcc.base.infra.constant.BaseConstants;
 import me.wcc.base.infra.utils.Results;
+import me.wcc.homenvi.entity.Notification;
+import me.wcc.homenvi.service.NotificationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +42,9 @@ public class AuthController extends BaseController {
     @Qualifier("consumerTokenServices")
     ConsumerTokenServices consumerTokenServices;
 
+    @Autowired
+    NotificationService notificationService;
+
     @GetMapping("/check")
     @ApiOperation("检查是否登录")
     public ResponseEntity check() {
@@ -50,6 +55,17 @@ public class AuthController extends BaseController {
     @ApiOperation("获取当前用户信息")
     public ResponseEntity<User> current() {
         return Results.success(super.getCurrentUser());
+    }
+
+    @ApiOperation(value = "当前用户关联明细")
+    @GetMapping("/currentDetail")
+    public ResponseEntity<User> currentDetail() {
+        User user = super.getCurrentUser();
+        Notification conditions = new Notification(user.getId(), BaseConstants.FLAG_YES);
+        List<Notification> unreadNotifications = notificationService.select(conditions);
+        user.setNotifications(unreadNotifications);
+        user.setNotifyCount(unreadNotifications.size());
+        return Results.success(user);
     }
 
     private static final String CLIENT_ID = "client_id";

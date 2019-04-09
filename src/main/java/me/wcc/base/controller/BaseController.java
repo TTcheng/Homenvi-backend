@@ -49,7 +49,7 @@ public abstract class BaseController {
      */
     protected User getCurrentUser() {
         String authorization = request.getHeader("Authorization");
-        if (null == authorization || !authorization.startsWith("Bearer ")) {
+        if (null == authorization) {
             throw new CommonException("Unauthorized");
         }
         String token = authorization.split(" ")[1];

@@ -1,7 +1,7 @@
 package me.wcc.base.controller;
 
-import me.wcc.auth.domain.CustomUserDetails;
-import me.wcc.auth.domain.entity.User;
+import me.wcc.auth.entity.CustomUserDetails;
+import me.wcc.auth.entity.User;
 import me.wcc.auth.service.CustomUserDetailService;
 import me.wcc.base.exception.CommonException;
 import me.wcc.base.infra.constant.BaseConstants;

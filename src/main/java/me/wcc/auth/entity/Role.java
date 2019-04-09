@@ -1,4 +1,4 @@
-package me.wcc.auth.domain;
+package me.wcc.auth.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 

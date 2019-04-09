@@ -1,4 +1,4 @@
-package me.wcc.auth.domain.entity;
+package me.wcc.auth.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +13,6 @@ import io.choerodon.mybatis.annotation.VersionAudit;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import me.wcc.auth.domain.Role;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,7 +23,7 @@ import java.util.List;
  *
  * @author ttchengwang@gmail.com 2019-03-25 17:32:27
  */
-@ApiModel("")
+@ApiModel("用户")
 @VersionAudit
 @ModifyAudit
 @Table(name = "iam_user")

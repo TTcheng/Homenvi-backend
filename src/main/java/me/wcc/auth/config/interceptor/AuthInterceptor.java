@@ -1,5 +1,6 @@
 package me.wcc.auth.config.interceptor;
 
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,14 +22,14 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String authorization = request.getHeader("Authorization");
-        if (null == authorization || !authorization.startsWith("Bearer ")) {
+        if (null == authorization || !authorization.startsWith(OAuth2AccessToken.BEARER_TYPE)) {
             response.setStatus(401);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write("{\"error\":\"unauthorized\",\"error_description\":\"Full authentication is required to access this resource\"}");
             return false;
         }
-        String token = authorization.split(" ")[1];
+        String token = authorization.substring(OAuth2AccessToken.BEARER_TYPE.length() + 1);
         OAuth2Authentication oAuth2Authentication = tokenStore.readAuthentication(token);
         if (null == oAuth2Authentication) {
             response.setStatus(401);

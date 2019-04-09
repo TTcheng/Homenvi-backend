@@ -2,7 +2,7 @@ package me.wcc.base.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.wcc.auth.domain.CustomUserDetails;
+import me.wcc.auth.entity.CustomUserDetails;
 import me.wcc.base.infra.constant.BaseConstants;
 import me.wcc.base.message.Message;
 import me.wcc.base.redis.RedisHelper;
@@ -21,6 +21,7 @@ import java.util.Locale;
  * @author chuncheng.wang@hand-china.com 19-3-11 下午4:17
  */
 @Service
+@SuppressWarnings("unused")
 public class CacheService {
     private static final long DEFAULT_USER_EXPIRE = 60 * 30L;
     private static final Logger LOGGER = LoggerFactory.getLogger(CacheService.class);
@@ -39,7 +40,7 @@ public class CacheService {
                             objectMapper.writeValueAsString(userDetails));
             redisHelper.setExpire(CustomUserDetails.CLASS_NAME, DEFAULT_USER_EXPIRE);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOGGER.error("cacheCustomUserDetails error", e);
         }
     }
 
@@ -59,7 +60,6 @@ public class CacheService {
             try {
                 return objectMapper.readValue(obj, CustomUserDetails.class);
             } catch (IOException e) {
-                // TODO 修复反序列化失败的问题
                 LOGGER.error("parse message error.{}", e.getMessage());
             }
         }
@@ -74,7 +74,7 @@ public class CacheService {
         try {
             redisHelper.hshPut(uniqueKey, message.code(), objectMapper.writeValueAsString(message));
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            LOGGER.error("cacheMessage error", e);
         }
     }
 

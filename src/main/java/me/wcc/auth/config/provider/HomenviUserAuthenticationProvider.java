@@ -1,7 +1,7 @@
 package me.wcc.auth.config.provider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.wcc.auth.domain.CustomUserDetails;
+import me.wcc.auth.entity.CustomUserDetails;
 import me.wcc.base.service.CacheService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

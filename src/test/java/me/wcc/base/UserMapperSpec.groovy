@@ -1,6 +1,6 @@
 package me.wcc.base
 
-import me.wcc.auth.domain.entity.User
+import me.wcc.auth.entity.User
 import me.wcc.auth.mapper.UserMapper
 import me.wcc.base.config.HomenviProperties
 import me.wcc.base.infra.utils.EncryptionUtils

@@ -2,18 +2,23 @@ package me.wcc.auth.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import me.wcc.auth.domain.entity.User;
+import me.wcc.auth.entity.User;
 import me.wcc.base.controller.BaseController;
 import me.wcc.base.exception.CommonException;
 import me.wcc.base.infra.constant.BaseConstants;
 import me.wcc.base.infra.utils.Results;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
+import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +30,19 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "认证接口")
-@RequestMapping("/user")
+@RequestMapping("/auth")
+@FrameworkEndpoint
 public class AuthController extends BaseController {
     @Autowired
     private TokenEndpoint tokenEndpoint;
 
+    @Autowired
+    @Qualifier("consumerTokenServices")
+    ConsumerTokenServices consumerTokenServices;
+
     @GetMapping("/check")
     @ApiOperation("检查是否登录")
-    public ResponseEntity check(){
+    public ResponseEntity check() {
         return Results.success();
     }
 
@@ -63,6 +73,22 @@ public class AuthController extends BaseController {
         UsernamePasswordAuthenticationToken principal = new UsernamePasswordAuthenticationToken(client,
                 null, null);
         return tokenEndpoint.postAccessToken(principal, parameters);
+    }
+
+    @DeleteMapping("/logout")
+    @ApiOperation("登出")
+    public ResponseEntity<String> logout() {
+        String accessToken = request.getHeader("Authorization");
+        if (StringUtils.isNoneBlank(accessToken) && accessToken.startsWith(OAuth2AccessToken.BEARER_TYPE)) {
+            accessToken = accessToken.substring(OAuth2AccessToken.BEARER_TYPE.length() + 1);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\":\"unauthorized\",\"error_description\":\"Full authentication is required to access this resource\"}");
+        }
+        if (consumerTokenServices.revokeToken(accessToken)) {
+            return Results.success("注销成功!");
+        } else {
+            return Results.error("注销失败!");
+        }
     }
 
 }

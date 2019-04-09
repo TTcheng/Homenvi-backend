@@ -1,8 +1,8 @@
 package me.wcc.auth.service;
 
-import me.wcc.auth.domain.CustomUserDetails;
-import me.wcc.auth.domain.Role;
-import me.wcc.auth.domain.entity.User;
+import me.wcc.auth.entity.CustomUserDetails;
+import me.wcc.auth.entity.Role;
+import me.wcc.auth.entity.User;
 import me.wcc.auth.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

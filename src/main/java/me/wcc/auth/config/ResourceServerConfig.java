@@ -17,11 +17,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers().antMatchers("/oauth/**", "/user/**", "/test/**", "/homenvi/**", "/openApi/**")
+        http.requestMatchers().antMatchers("/oauth/**", "/auth/**", "/test/**", "/homenvi/**", "/users/**")
                 .and()
-                .authorizeRequests().antMatchers("/homenvi/**").authenticated()
-                .and()
-                .authorizeRequests().antMatchers("/oauth/**", "/user/login").permitAll()
+                .authorizeRequests().antMatchers("/oauth/**", "/test/**", "/auth/login").permitAll()
+                .anyRequest().authenticated()
                 .and().logout().permitAll()
                 .and().formLogin().permitAll()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());

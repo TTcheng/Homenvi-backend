@@ -1,6 +1,5 @@
-package me.wcc.auth.domain;
+package me.wcc.auth.entity;
 
-import me.wcc.auth.domain.entity.User;
 import me.wcc.base.infra.constant.BaseConstants;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

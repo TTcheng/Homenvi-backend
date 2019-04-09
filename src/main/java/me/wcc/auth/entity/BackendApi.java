@@ -1,4 +1,4 @@
-package me.wcc.auth.domain;
+package me.wcc.auth.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

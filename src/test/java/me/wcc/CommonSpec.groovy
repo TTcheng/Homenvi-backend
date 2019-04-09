@@ -1,6 +1,6 @@
 package me.wcc
 
-import me.wcc.auth.domain.entity.User
+import me.wcc.auth.entity.User
 import org.apache.commons.lang3.StringUtils
 import org.springframework.core.io.DefaultResourceLoader
 import org.springframework.core.io.ResourceLoader

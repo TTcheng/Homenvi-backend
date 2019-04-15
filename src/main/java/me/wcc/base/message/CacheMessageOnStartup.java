@@ -47,7 +47,7 @@ public class CacheMessageOnStartup implements ApplicationListener<ApplicationSta
         try {
             messagesEn.load(resourceInputStreamEn);
         } catch (IOException e) {
-            LOGGER.error("读取{0}失败", MESSAGES_EN);
+            LOGGER.error("读取{}失败", MESSAGES_EN);
         }
         try {
             messagesZh.load(resourceInputStreamZh);

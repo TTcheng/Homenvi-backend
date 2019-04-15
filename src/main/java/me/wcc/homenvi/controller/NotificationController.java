@@ -1,6 +1,6 @@
 package me.wcc.homenvi.controller;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.Api;
 import me.wcc.base.controller.BaseController;
 import me.wcc.base.domain.Page;
 import me.wcc.base.infra.utils.Results;
@@ -23,9 +23,9 @@ import springfox.documentation.annotations.ApiIgnore;
  * @author chuncheng.wang@hand-china.com
  * @date 2019-04-08 17:38:52
  */
-@ApiModel("通知管理")
+@Api(tags = "通知管理")
 @RestController("notificationController")
-@RequestMapping("/notifications")
+@RequestMapping("/homenvi/notifications")
 public class NotificationController extends BaseController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class NotificationController extends BaseController {
     /**
      * 列表
      */
-    @ApiOperation(value = "列表")
+    @ApiOperation(value = "通知列表")
     @GetMapping
     public ResponseEntity<Page<Notification>> list(Notification notification, @ApiIgnore @SortDefault(value = Notification.FIELD_ID,
             direction = Sort.Direction.DESC) PageRequest pageRequest) {
@@ -46,7 +46,7 @@ public class NotificationController extends BaseController {
     /**
      * 详细
      */
-    @ApiOperation(value = "明细")
+    @ApiOperation(value = "通知明细")
     @RequestMapping("/{id}")
     public ResponseEntity<Notification> detail(@PathVariable Long id) {
         Notification notification = notificationService.selectByPrimaryKey(id);
@@ -56,7 +56,7 @@ public class NotificationController extends BaseController {
     /**
      * 创建
      */
-    @ApiOperation(value = "创建")
+    @ApiOperation(value = "创建通知")
     @PostMapping
     public ResponseEntity<Notification> create(@RequestBody Notification notification) {
         notificationService.insertSelective(notification);
@@ -66,7 +66,7 @@ public class NotificationController extends BaseController {
     /**
      * 修改
      */
-    @ApiOperation(value = "修改")
+    @ApiOperation(value = "修改通知")
     @PutMapping
     public ResponseEntity<Notification> update(@RequestBody Notification notification) {
         notificationService.updateByPrimaryKeySelective(notification);
@@ -76,7 +76,7 @@ public class NotificationController extends BaseController {
     /**
      * 删除
      */
-    @ApiOperation(value = "删除")
+    @ApiOperation(value = "删除通知")
     @DeleteMapping("/{id}")
     public ResponseEntity<Notification> remove(@PathVariable Long id) {
         notificationService.deleteByPrimaryKey(id);

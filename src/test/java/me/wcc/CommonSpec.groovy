@@ -1,5 +1,6 @@
 package me.wcc
 
+import me.wcc.auth.config.encoder.HomenviPasswordEncoder
 import me.wcc.auth.entity.User
 import org.apache.commons.lang3.StringUtils
 import org.springframework.core.io.DefaultResourceLoader

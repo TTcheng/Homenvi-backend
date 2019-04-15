@@ -1,5 +1,6 @@
 package me.wcc.homenvi.controller;
 
+import io.swagger.annotations.Api;
 import me.wcc.base.message.MessageAccessor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import io.choerodon.mybatis.helper.LanguageHelper;
  *
  * @author chuncheng.wang@hand-china.com 19-3-10 下午1:17
  */
+@Api(tags = "测试接口")
 @RequestMapping("/homenvi")
 @RestController
 public class HelloController {

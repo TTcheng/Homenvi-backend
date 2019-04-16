@@ -3,7 +3,7 @@ spring:
     name: Homenvi
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://132.232.181.189:3306/iems_monitor?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&serverTimezone=UTC&useLegacyDatetimeCode=false
+    url: jdbc:mysql://132.232.181.189:3306/iems_monitor?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&serverTimezone=GMT%2B8&useLegacyDatetimeCode=false
     username: iems
     password: iems
     name: homenvi-db

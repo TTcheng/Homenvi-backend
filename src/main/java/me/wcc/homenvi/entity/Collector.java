@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 @ApiModel("终端采集节点")
 @Table(name = "collector")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Collector {
 
     public static final String FIELD_ID = "id";

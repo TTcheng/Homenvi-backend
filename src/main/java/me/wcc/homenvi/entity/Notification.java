@@ -10,6 +10,7 @@ import io.choerodon.mybatis.domain.AuditDomain;
 import io.choerodon.mybatis.annotation.ModifyAudit;
 import io.choerodon.mybatis.annotation.VersionAudit;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,6 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 @VersionAudit
 @ModifyAudit
 @Table(name = "notification")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Notification extends AuditDomain {
 
     public static final String FIELD_ID = "id";

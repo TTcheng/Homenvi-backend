@@ -10,6 +10,9 @@ spring:
   redis:
     host: localhost
     database: 0
+
+homenvi:
+  secret-key: c54a32d70ea36c118a651aec11fe747f
 #  main:
 #    allow-bean-definition-overriding: true
 

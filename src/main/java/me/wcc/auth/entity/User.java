@@ -11,9 +11,9 @@ import io.choerodon.mybatis.domain.AuditDomain;
 import io.choerodon.mybatis.annotation.ModifyAudit;
 import io.choerodon.mybatis.annotation.VersionAudit;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import me.wcc.homenvi.entity.Notification;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +28,7 @@ import java.util.List;
 @VersionAudit
 @ModifyAudit
 @Table(name = "iam_user")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User extends AuditDomain implements Serializable {
 
     private static final long serialVersionUID = 5707454509247323466L;
@@ -118,12 +119,6 @@ public class User extends AuditDomain implements Serializable {
     // ------------------------------------------------------------------------------
     @Transient
     private List<Role> roles;
-
-    /**
-     * 未读通知
-     */
-    @Transient
-    private List<Notification> notifications;
 
     /**
      * 未读通知数量
@@ -323,17 +318,6 @@ public class User extends AuditDomain implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    /**
-     * @return 未读通知
-     */
-    public List<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
     }
 
     /**

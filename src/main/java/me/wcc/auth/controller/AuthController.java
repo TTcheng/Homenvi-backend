@@ -62,9 +62,7 @@ public class AuthController extends BaseController {
     public ResponseEntity<User> currentDetail() {
         User user = super.getCurrentUser();
         Notification conditions = new Notification(user.getId(), BaseConstants.FLAG_YES);
-        List<Notification> unreadNotifications = notificationService.select(conditions);
-        user.setNotifications(unreadNotifications);
-        user.setNotifyCount(unreadNotifications.size());
+        user.setNotifyCount(notificationService.selectCount(conditions));
         return Results.success(user);
     }
 

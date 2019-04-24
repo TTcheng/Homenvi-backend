@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="me.wcc.auth.mapper.UserMapper">
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap id="BaseResultMap" type="me.wcc.auth.entity.User">
         <result column="id" property="id" jdbcType="DECIMAL"/>
         <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
@@ -26,4 +26,56 @@
         <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
         <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
     </resultMap>
+
+    <sql id="insensitiveFields">
+        u.id,
+        u.login_name,
+        u.email,
+        u.real_name,
+        u.phone,
+        u.image_url,
+        u.profile_photo,
+        u.language,
+        u.time_zone,
+        u.object_version_number
+    </sql>
+    <select id="selectInsensitiveUser" parameterType="me.wcc.auth.entity.User" resultMap="BaseResultMap">
+        SELECT
+        <include refid="insensitiveFields"/>
+        FROM iam_user u
+        WHERE u.id = #{id}
+    </select>
+
+    <select id="selectInsensitiveUsers" parameterType="me.wcc.auth.entity.User" resultMap="BaseResultMap">
+        SELECT
+        <include refid="insensitiveFields"/>
+        FROM iam_user u
+        WHERE 1=1
+        <if test="id != null">
+            AND u.id = #{id}
+        </if>
+        <if test="loginName != null and loginName != ''">
+            <bind name="loginNameLike" value="'%'+loginName +'%'"/>
+            AND u.login_name LIKE #{loginNameLike}
+        </if>
+        <if test="email != null and email != ''">
+            AND u.email = #{email}
+        </if>
+        <if test="loginName != null and loginName != ''">
+            <bind name="realNameLike" value="'%'+realName +'%'"/>
+            AND u.real_name LIKE #{realNameLike}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND u.phone = #{phone}
+        </if>
+        <if test="imageUrl != null and imageUrl != ''">
+            AND u.image_url = #{imageUrl}
+        </if>
+        <if test="language != null and language != ''">
+            AND u.language = #{language}
+        </if>
+        <if test="timeZone != null and timeZone != ''">
+            AND u.time_zone = #{timeZone}
+        </if>
+    </select>
 </mapper>

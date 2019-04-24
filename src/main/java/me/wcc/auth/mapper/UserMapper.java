@@ -3,6 +3,8 @@ package me.wcc.auth.mapper;
 
 import me.wcc.auth.entity.User;
 
+import java.util.List;
+
 import io.choerodon.mybatis.common.BaseMapper;
 
 /**
@@ -12,4 +14,7 @@ import io.choerodon.mybatis.common.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    List selectInsensitiveUsers(User condition);
+
+    User selectInsensitiveUser(Long id);
 }

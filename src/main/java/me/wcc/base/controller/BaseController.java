@@ -67,7 +67,9 @@ public abstract class BaseController {
             if (null == userDetails) {
                 userDetails = userDetailsService.loadUserByUsername(username);
             }
-            return ((CustomUserDetails) userDetails).getUser();
+            User user = ((CustomUserDetails) userDetails).getUser();
+            user.setPassword(null);
+            return user;
         }
         throw new CommonException(BaseConstants.ErrorCode.UNKNOWN_AUTH_ERROR);
     }

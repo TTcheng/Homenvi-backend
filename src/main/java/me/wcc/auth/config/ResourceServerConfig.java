@@ -20,7 +20,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.requestMatchers().antMatchers("/auth/**", "/test/**", "/openApi/**", "/homenvi/**", "/users/**")
                 .and()
                 .authorizeRequests().antMatchers("/test/**", "/openApi/**", "/auth/login").permitAll()
-                .anyRequest().hasAnyRole("ADMIN", "USER", "SUPER_USER", "ROLE_SUPER")
+                .anyRequest().authenticated()
+                //.hasAnyRole("ADMIN", "USER", "SUPER_USER", "ROLE_SUPER")
                 .and().logout().permitAll()
                 .and().formLogin().permitAll()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());

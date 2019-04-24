@@ -37,7 +37,7 @@ public class UserController extends BaseController {
     @GetMapping
     public ResponseEntity<Page<User>> list(User user, @ApiIgnore @SortDefault(value = User.FIELD_ID,
             direction = Sort.Direction.DESC) PageRequest pageRequest) {
-        Page<User> list = userService.pageAndSort(pageRequest, user);
+        Page<User> list = userService.pageInsensitiveUsers(pageRequest, user);
         return Results.success(list);
     }
 
@@ -45,7 +45,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "用户明细")
     @RequestMapping("/{id}")
     public ResponseEntity<User> detail(@PathVariable Long id) {
-        User user = userService.selectByPrimaryKey(id);
+        User user = userService.selectInsensitiveUser(id);
         return Results.success(user);
     }
 

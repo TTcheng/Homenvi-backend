@@ -1,5 +1,6 @@
 package me.wcc.homenvi.controller;
 
+import io.swagger.annotations.Api;
 import me.wcc.base.controller.BaseController;
 import me.wcc.base.domain.Page;
 import me.wcc.base.infra.utils.Results;
@@ -21,6 +22,7 @@ import springfox.documentation.annotations.ApiIgnore;
  * @author ttchengwang@foxmail.com
  * @date 2019-04-23 16:39:19
  */
+@Api(tags = "influx用户管理")
 @RestController("influxUserController.v1")
 @RequestMapping("/homenvi/influxusers")
 public class InfluxUserController extends BaseController {
@@ -31,7 +33,7 @@ public class InfluxUserController extends BaseController {
     /**
      * 列表
      */
-    @ApiOperation(value = "列表")
+    @ApiOperation(value = "influx用户列表")
     @GetMapping
     public ResponseEntity<Page<InfluxUser>> list(InfluxUser influxUser, @ApiIgnore @SortDefault(value = InfluxUser.FIELD_ID,
             direction = Sort.Direction.DESC) PageRequest pageRequest){
@@ -43,7 +45,7 @@ public class InfluxUserController extends BaseController {
     /**
      * 详细
      */
-    @ApiOperation(value = "明细")
+    @ApiOperation(value = "influx用户明细")
     @RequestMapping("/{id}")
     public ResponseEntity<InfluxUser> detail(@PathVariable Long id) {
         InfluxUser influxUser = influxUserService.selectByPrimaryKey(id);
@@ -53,7 +55,7 @@ public class InfluxUserController extends BaseController {
     /**
      * 创建
      */
-    @ApiOperation(value = "创建")
+    @ApiOperation(value = "创建influx用户")
     @PostMapping
     public ResponseEntity<InfluxUser> create(@RequestBody InfluxUser influxUser) {
             influxUserService.insertSelective(influxUser);
@@ -63,7 +65,7 @@ public class InfluxUserController extends BaseController {
     /**
      * 修改
      */
-    @ApiOperation(value = "修改")
+    @ApiOperation(value = "修改influx用户")
     @PutMapping
     public ResponseEntity<InfluxUser> update(@RequestBody InfluxUser influxUser) {
             influxUserService.updateByPrimaryKeySelective(influxUser);
@@ -73,7 +75,7 @@ public class InfluxUserController extends BaseController {
     /**
      * 删除
      */
-    @ApiOperation(value = "删除")
+    @ApiOperation(value = "删除influx用户")
     @DeleteMapping("/{id}")
     public ResponseEntity<InfluxUser> remove(@PathVariable Long id) {
             influxUserService.deleteByPrimaryKey(id);

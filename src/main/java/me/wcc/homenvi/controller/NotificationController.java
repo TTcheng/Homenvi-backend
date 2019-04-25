@@ -25,7 +25,7 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @Api(tags = "通知管理")
 @RestController("notificationController")
-@RequestMapping("/homenvi/notifications")
+@RequestMapping("/notifications")
 public class NotificationController extends BaseController {
 
     @Autowired

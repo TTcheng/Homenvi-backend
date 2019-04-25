@@ -1,6 +1,7 @@
 package me.wcc.homenvi.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import me.wcc.base.controller.BaseController;
 import me.wcc.base.infra.utils.Results;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ public class OpenController extends BaseController {
         return Results.success("Hello world");
     }
 
+    @ApiOperation("模拟influxDB数据写入")
     @PostMapping("/write")
     public ResponseEntity<String> write(@RequestBody String body, @RequestParam String db, @RequestParam String u,
                                         @RequestParam String p) {

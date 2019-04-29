@@ -53,6 +53,10 @@ public abstract class BaseController {
             throw new CommonException("Unauthorized");
         }
         String token = authorization.split(" ")[1];
+        return getCurrentUser(token);
+    }
+
+    protected User getCurrentUser(String token) {
         OAuth2Authentication oAuth2Authentication = tokenStore.readAuthentication(token);
         if (null == oAuth2Authentication) {
             throw new CommonException("Access token expired");

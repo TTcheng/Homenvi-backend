@@ -25,7 +25,7 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @Api(tags = "通知管理")
 @RestController("notificationController")
-@RequestMapping("/notifications")
+@RequestMapping("/homenvi/notifications")
 public class NotificationController extends BaseController {
 
     @Autowired
@@ -47,7 +47,7 @@ public class NotificationController extends BaseController {
      * 详细
      */
     @ApiOperation(value = "通知明细")
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Notification> detail(@PathVariable Long id) {
         Notification notification = notificationService.selectByPrimaryKey(id);
         return Results.success(notification);

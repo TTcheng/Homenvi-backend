@@ -13,6 +13,13 @@ import spock.lang.Specification
  * @author chuncheng.wang@hand-china.com 19-3-11 下午4:37
  */
 class CommonSpec extends Specification {
+    void "string length"(){
+        String data = "humidity=56.80,celsius=29.50,fahrenheit=85.10,heatIndexCelsius=31.36,heatIndexFahrenheit=88.45,sound=515,brightness=18,dustDensity=145.59,gasValue=377";
+        println data.length()
+        expect:
+        data.length() > 0
+    }
+
     void "test entityClass"(){
         when:
         Class<User> entityClass;

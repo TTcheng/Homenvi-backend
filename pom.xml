@@ -11,11 +11,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>me.wcc</groupId>
-    <artifactId>IEMS-backend</artifactId>
+    <artifactId>Homenvi-backend</artifactId>
     <description>Indoor environmental monitoring system</description>
     <version>1.0-SNAPSHOT</version>
     <build>
-        <finalName>IEMS</finalName>
+        <finalName>Homenvi-backend</finalName>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

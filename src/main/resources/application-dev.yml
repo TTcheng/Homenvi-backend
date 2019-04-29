@@ -28,8 +28,8 @@ logging:
     root: info
     me.wcc.base: debug
     me.wcc.auth: debug
-    me.wcc.iems: debug
-    org.springframework.security: DEBUG
+    me.wcc.homenvi: debug
+#    org.springframework.security: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread][%level] %logger- %msg%n"
 server:

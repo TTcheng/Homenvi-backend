@@ -2,6 +2,7 @@ package me.wcc.auth.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import me.wcc.auth.entity.CustomUserDetails;
 import me.wcc.auth.entity.User;
 import me.wcc.base.controller.BaseController;
 import me.wcc.base.exception.CommonException;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+
+import io.choerodon.mybatis.helper.AuditHelper;
 
 /**
  * @author chuncheng.wang@hand-china.com 19-3-27 上午10:22
@@ -68,6 +71,7 @@ public class AuthController extends BaseController {
 
     private static final String CLIENT_ID = "client_id";
     private static final String CLIENT_SECRET = "client_secret";
+    private static final String USERNAME = "username";
 
     @PostMapping("/login")
     @ApiOperation("登录")
@@ -86,7 +90,13 @@ public class AuthController extends BaseController {
                 new org.springframework.security.core.userdetails.User(clientId, clientSecret, authorities);
         UsernamePasswordAuthenticationToken principal = new UsernamePasswordAuthenticationToken(client,
                 null, null);
-        return tokenEndpoint.postAccessToken(principal, parameters);
+        ResponseEntity<OAuth2AccessToken> tokenResponse = tokenEndpoint.postAccessToken(principal, parameters);
+        String username = parameters.get(USERNAME);
+        if (null != username) {
+            CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(username);
+            AuditHelper.setAudit(userDetails.getUserId());
+        }
+        return tokenResponse;
     }
 
     @DeleteMapping("/logout")

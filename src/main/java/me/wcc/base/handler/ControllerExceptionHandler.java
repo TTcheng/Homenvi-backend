@@ -3,6 +3,8 @@ package me.wcc.base.handler;
 import me.wcc.base.exception.CommonException;
 import me.wcc.base.exception.ExceptionResponse;
 import me.wcc.base.exception.NotFoundException;
+import me.wcc.base.exception.OptimisticLockException;
+import me.wcc.base.infra.constant.BaseConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,6 +127,19 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(
                 new ExceptionResponse(true, "error.db.duplicateKey", message != null ? message : "error.key.duplicate"),
                 HttpStatus.OK);
+    }
+
+    /**
+     * 拦截 {@link OptimisticLockException} 异常信息，返回 “记录不存在或版本不一致” 信息
+     *
+     * @param exception OptimisticLockException
+     * @return ExceptionResponse
+     */
+    @ExceptionHandler(OptimisticLockException.class)
+    public ResponseEntity<ExceptionResponse> process(OptimisticLockException exception) {
+        LOGGER.warn(exception.getMessage(), exception);
+        ExceptionResponse er = new ExceptionResponse(BaseConstants.ErrorCode.OPTIMISTIC_LOCK);
+        return new ResponseEntity<>(er, HttpStatus.OK);
     }
 
     /**

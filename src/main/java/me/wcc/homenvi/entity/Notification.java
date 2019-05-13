@@ -13,6 +13,7 @@ import io.choerodon.mybatis.annotation.VersionAudit;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import me.wcc.base.infra.constant.BaseConstants;
 
 /**
  * 通知
@@ -47,6 +48,13 @@ public class Notification extends AuditDomain {
         this.userid = userid;
         this.unread = unread;
     }
+
+    public Notification(@NotNull Long userid, @NotEmpty String title, String content) {
+        this.userid = userid;
+        this.title = title;
+        this.content = content;
+    }
+
     //
 // 数据库字段
 // ------------------------------------------------------------------------------
@@ -59,7 +67,7 @@ public class Notification extends AuditDomain {
     @NotNull
     private Long userid;
     @ApiModelProperty("是否未读")
-    private Integer unread;
+    private Integer unread = BaseConstants.FLAG_YES;
     @ApiModelProperty("标题")
     @NotEmpty
     private String title;

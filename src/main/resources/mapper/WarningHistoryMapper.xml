@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.wcc.homenvi.mapper.WarningHistoryMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="me.wcc.homenvi.entity.WarningHistory">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="collection_warn_id" property="collectionWarnId" jdbcType="DECIMAL"/>
+        <result column="collection_field" property="collectionField" jdbcType="VARCHAR"/>
+        <result column="collection_name" property="collectionName" jdbcType="VARCHAR"/>
+        <result column="warn_reason" property="warnReason" jdbcType="VARCHAR"/>
+        <result column="warn_content" property="warnContent" jdbcType="VARCHAR"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+    </resultMap>
+
+    <select id="selectCountFromTime" parameterType="me.wcc.homenvi.entity.WarningHistory" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM warning_history wh
+        WHERE 1=1
+        <if test="creationDate != null">
+            AND wh.creation_date > #{creationDate}
+        </if>
+        <if test="id != null">
+            AND wh.id = #{id}
+        </if>
+        <if test="collectionWarnId != null">
+            AND wh.collection_warn_id = #{collectionWarnId}
+        </if>
+        <if test="collectionField != null and collectionField != ''">
+            AND wh.collection_field = #{collectionField}
+        </if>
+        <if test="collectionName != null and collectionName != ''">
+            AND wh.collection_name = #{collectionName}
+        </if>
+        <if test="warnContent != null">
+            AND wh.warn_content = #{warnContent}
+        </if>
+        <if test="warnReason != null and warnReason != ''">
+            AND wh.warn_reason = #{warnReason}
+        </if>
+    </select>
+
+</mapper>

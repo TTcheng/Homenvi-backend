@@ -5,7 +5,7 @@ CREATE TABLE `notification`
     userid                BIGINT                                                             NOT NULL COMMENT '所属用户ID',
     `unread`              TINYINT(1)   DEFAULT 1 COMMENT '是否未读',
     title                 varchar(60)                                                        NOT NULL COMMENT '标题',
-    content               varchar(480) DEFAULT NULL COMMENT '内容',
+    content               varchar(1440) DEFAULT NULL COMMENT '内容',
     object_version_number bigint       default 1                                             null,
     created_by            bigint       default 0                                             null,
     creation_date         datetime     default CURRENT_TIMESTAMP                             null,

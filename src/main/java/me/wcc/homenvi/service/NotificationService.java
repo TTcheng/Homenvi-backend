@@ -11,6 +11,6 @@ import io.choerodon.mybatis.service.BaseService;
  * @date 2019-04-08 17:38:52
  */
 public interface NotificationService extends BaseService<Notification> {
-
+    void newNotification(Long userid, String title, String content);
 }
 

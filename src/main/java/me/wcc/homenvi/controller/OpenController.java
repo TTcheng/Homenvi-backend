@@ -44,9 +44,23 @@ public class OpenController extends BaseController {
         LOGGER.info("Content-Type:{}", request.getHeader("Content-Type"));
         LOGGER.info("db:{}", db);
         LOGGER.info("u:{}", u);
-        LOGGER.info("p:{}",p);
-        LOGGER.info("body:{}",body);
+        LOGGER.info("p:{}", p);
+        LOGGER.info("body:{}", body);
         LOGGER.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         return Results.success(body);
+    }
+
+    @ApiOperation("模拟influxDB数据查询")
+    @GetMapping("/query")
+    public ResponseEntity<String> query(@RequestParam String q, @RequestParam String db, @RequestParam String u,
+                                        @RequestParam String p) {
+
+        LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        LOGGER.info("db:{}", db);
+        LOGGER.info("u:{}", u);
+        LOGGER.info("p:{}", p);
+        LOGGER.info("q:{}", q);
+        LOGGER.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        return Results.success(q);
     }
 }

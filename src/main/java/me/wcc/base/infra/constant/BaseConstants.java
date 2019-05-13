@@ -349,6 +349,14 @@ public class BaseConstants {
          */
         public static final String QUESTION = "?";
         /**
+         * 左小括号：(
+         */
+        public static final String LEFT_SMALL_BRACE = "(";
+        /**
+         * 右小括号：)
+         */
+        public static final String RIGHT_SMALL_BRACE = ")";
+        /**
          * 左花括号：{
          */
         public static final String LEFT_BIG_BRACE = "{";
@@ -372,6 +380,7 @@ public class BaseConstants {
         private Symbol() {
         }
     }
+
     private BaseConstants() {
     }
 }

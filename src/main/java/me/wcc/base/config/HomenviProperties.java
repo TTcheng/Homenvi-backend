@@ -12,6 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "homenvi")
 public class HomenviProperties {
     private String secretKey = "c54a32d70ea36c118a651aec11fe747f";
+    private String influxDatabase;
+    private String influxMeasurement;
 
     public String getSecretKey() {
         return secretKey;
@@ -19,6 +21,22 @@ public class HomenviProperties {
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getInfluxDatabase() {
+        return influxDatabase;
+    }
+
+    public void setInfluxDatabase(String influxDatabase) {
+        this.influxDatabase = influxDatabase;
+    }
+
+    public String getInfluxMeasurement() {
+        return influxMeasurement;
+    }
+
+    public void setInfluxMeasurement(String influxMeasurement) {
+        this.influxMeasurement = influxMeasurement;
     }
 }
 

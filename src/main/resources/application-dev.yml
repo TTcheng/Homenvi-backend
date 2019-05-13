@@ -10,9 +10,19 @@ spring:
   redis:
     host: localhost
     database: 0
+  influx:
+    user: admin
+    password: wcc
+    url: http://132.232.181.189:8086/
+  mail:
+    host: smtp.163.com
+    username: imchengwang@163.com
+    password: TTcheng0314
 
 homenvi:
   secret-key: c54a32d70ea36c118a651aec11fe747f
+  influx-measurement: collections
+  influx-database: homenvi
 #  main:
 #    allow-bean-definition-overriding: true
 
@@ -25,11 +35,11 @@ mybatis:
 
 logging:
   level:
-    root: info
-    me.wcc.base: debug
-    me.wcc.auth: debug
-    me.wcc.homenvi: debug
-#    org.springframework.security: DEBUG
+    root: error
+#    me.wcc.base: debug
+#    me.wcc.auth: debug
+#    me.wcc.homenvi: debug
+  #    org.springframework.security: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread][%level] %logger- %msg%n"
 server:

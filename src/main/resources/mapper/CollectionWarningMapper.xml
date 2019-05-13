@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.wcc.homenvi.mapper.CollectionWarningMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap id="BaseResultMap" type="me.wcc.homenvi.entity.CollectionWarning">
+        <result column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="collection_spec_id" property="collectionSpecId" jdbcType="DECIMAL"/>
+        <result column="collection_field" property="collectionField" jdbcType="VARCHAR"/>
+        <result column="collection_name" property="collectionName" jdbcType="VARCHAR"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="value_type" property="valueType" jdbcType="VARCHAR"/>
+        <result column="upper_bound" property="upperBound" jdbcType="DECIMAL"/>
+        <result column="lower_bound" property="lowerBound" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="advice" property="advice" jdbcType="VARCHAR"/>
+        <result column="object_version_number" property="objectVersionNumber" jdbcType="DECIMAL"/>
+        <result column="created_by" property="createdBy" jdbcType="DECIMAL"/>
+        <result column="creation_date" property="creationDate" jdbcType="DATE"/>
+        <result column="last_updated_by" property="lastUpdatedBy" jdbcType="DECIMAL"/>
+        <result column="last_update_date" property="lastUpdateDate" jdbcType="DATE"/>
+    </resultMap>
+
+
+</mapper>

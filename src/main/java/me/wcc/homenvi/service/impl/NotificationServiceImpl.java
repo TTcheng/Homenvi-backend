@@ -16,4 +16,9 @@ import io.choerodon.mybatis.service.BaseServiceImpl;
 public class NotificationServiceImpl extends BaseServiceImpl<Notification> implements NotificationService {
 
 
+    @Override
+    public void newNotification(Long userid, String title, String content) {
+        Notification notification = new Notification(userid, title, content);
+        insert(notification);
+    }
 }

@@ -138,9 +138,9 @@ public class HomenviCollectionsService {
             }
             long increase = Math.round(value) - Math.round(lastValue);
             if (increase > 0) {
-                reportBuilder.append("较上个周期增加").append(increase).append(specification.getUnit());
+                reportBuilder.append("较上个周期增加").append(Math.abs(increase)).append(specification.getUnit());
             } else if (increase < 0) {
-                reportBuilder.append("较上个周期降低").append(increase).append(specification.getUnit());
+                reportBuilder.append("较上个周期降低").append(Math.abs(increase)).append(specification.getUnit());
             }
             reportBuilder.append('\n');
         });
@@ -151,6 +151,7 @@ public class HomenviCollectionsService {
     private final String sufSmall = "</small>";
     private final String preStrong = "<strong>";
     private final String sufStrong = "</strong>";
+
     private String buildHtmlContent(Map<String, Double> meanValues, Map<String, Double> lastMeanValues,
                                     Map<String, CollectionSpecification> specificationMap) {
         StringBuilder reportBuilder = new StringBuilder();
@@ -167,11 +168,11 @@ public class HomenviCollectionsService {
             }
             long increase = Math.round(value) - Math.round(lastValue);
             if (increase > 0) {
-                reportBuilder.append("较上个周期增加").append(increase).append(preSmall).append(specification.getUnit())
-                        .append(sufSmall);
+                reportBuilder.append("较上个周期增加").append(Math.abs(increase)).append(preSmall)
+                        .append(specification.getUnit()).append(sufSmall);
             } else if (increase < 0) {
-                reportBuilder.append("较上个周期降低").append(increase).append(preSmall).append(specification.getUnit())
-                        .append(sufSmall);
+                reportBuilder.append("较上个周期降低").append(Math.abs(increase)).append(preSmall)
+                        .append(specification.getUnit()).append(sufSmall);
             } else {
                 reportBuilder.append("与上个周期持平");
             }

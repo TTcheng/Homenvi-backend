@@ -132,11 +132,11 @@ public class HomenviJobs {
                     for (CollectionWarning warning : collectionWarnings) {
                         if (warning.satisfy(value)) {
                             WarningHistory condition = new WarningHistory(warning.getId());
-                            LocalDateTime anHourAgo = LocalDateTime.now().minusHours(1);
+                            LocalDateTime anHourAgo = LocalDateTime.now().minusDays(1);
                             condition.setCreationDate(Date.from(anHourAgo.atZone(ZoneId.systemDefault()).toInstant()));
                             Integer count = warningHistoryService.selectCountFromTime(condition);
                             if (null != count && count > 0) {
-                                LOGGER.debug("一小时内不再发起第二次通知");
+                                LOGGER.debug("一天内不再发起第二次通知");
                                 return;
                             }
                             // generate new warning notification

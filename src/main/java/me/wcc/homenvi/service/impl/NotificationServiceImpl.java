@@ -1,5 +1,6 @@
 package me.wcc.homenvi.service.impl;
 
+import me.wcc.base.infra.constant.BaseConstants;
 import org.springframework.stereotype.Service;
 import me.wcc.homenvi.entity.Notification;
 import me.wcc.homenvi.service.NotificationService;
@@ -19,6 +20,7 @@ public class NotificationServiceImpl extends BaseServiceImpl<Notification> imple
     @Override
     public void newNotification(Long userid, String title, String content) {
         Notification notification = new Notification(userid, title, content);
+        notification.setUnread(BaseConstants.FLAG_YES);
         insert(notification);
     }
 }

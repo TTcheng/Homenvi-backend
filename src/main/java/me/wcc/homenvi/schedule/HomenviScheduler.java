@@ -21,8 +21,7 @@ public class HomenviScheduler {
     /**
      * 每天晚上6点生成一天的日报
      */
-//    @Scheduled(cron = "0 0 18 * * ?")
-    @Scheduled(cron = "0 24 15 * * ?")
+    @Scheduled(cron = "0 0 18 * * ?")
     public void dayReport() {
         homenviJobs.doDayReport();
     }

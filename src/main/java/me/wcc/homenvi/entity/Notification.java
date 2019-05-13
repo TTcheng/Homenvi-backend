@@ -67,7 +67,7 @@ public class Notification extends AuditDomain {
     @NotNull
     private Long userid;
     @ApiModelProperty("是否未读")
-    private Integer unread = BaseConstants.FLAG_YES;
+    private Integer unread;
     @ApiModelProperty("标题")
     @NotEmpty
     private String title;

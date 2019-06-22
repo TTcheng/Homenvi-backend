@@ -34,7 +34,7 @@ Thumbs.db
 gitlabci/.generated
 
 /bin
-# src/main/resources/application.yml
+src/main/resources/application-dev.yml
 # ./*.sh
 
 # vs code

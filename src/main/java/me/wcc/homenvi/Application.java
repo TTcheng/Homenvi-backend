@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  */
 @EnableScheduling
 @EnableSwagger2Doc
-@EnableAuthorizationServer
+@EnableAuthorizationServer // 提供/oauth/authorize,/oauth/token,/oauth/check_token,/oauth/confirm_access,/oauth/error
 @SpringBootApplication(scanBasePackages = {"io.choerodon.mybatis", "me.wcc.auth", "me.wcc.base", "me.wcc.homenvi"})
 public class Application {
     public static void main(String[] args) {
